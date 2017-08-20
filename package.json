@@ -1,0 +1,37 @@
+{
+  "name": "cordova-plugin-android-sensor-listeners",
+  "version": "0.1.0",
+  "description": "This plugin gives Cordova's applications access to Android's sensors",
+  "cordova": {
+    "id": "cordova-plugin-android-sensor-listeners",
+    "platforms": [
+      "android"
+    ]
+  },
+  "scripts": {
+    "release": "standard-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuentinRoy/cordova-plugin-android-sensor-listeners.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "sensors"
+  ],
+  "engines": {
+    "cordova": ">=3.4.0"
+  },
+  "author": "Quentin Roy <quentin@quentinroy.fr>",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/QuentinRoy/cordova-plugin-android-sensor-listeners/issues"
+  },
+  "homepage": "https://github.com/QuentinRoy/cordova-plugin-android-sensor-listeners#readme",
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-es5": "^0.5.0",
+    "standard-version": "^4.2.0"
+  }
+}
