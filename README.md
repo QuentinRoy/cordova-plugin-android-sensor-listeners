@@ -11,15 +11,14 @@ cordova plugin add https://github.com/QuentinRoy/cordova-plugin-android-sensors.
 <a name="sensors"></a>
 
 ## API: sensors
-**Kind**: global namespace  
 
 * [sensors](#sensors) : <code>object</code>
-    * [.addSensorListener(sensorType, samplingRate, listener, [callback])](#sensors.addSensorListener) ⇒ <code>undefined</code>
-    * [.removeSensorListener(sensorType, samplingRate, listener, [callback])](#sensors.removeSensorListener) ⇒ <code>undefined</code>
+    * [.addSensorListener(sensorType, samplingPeriod, listener, [callback])](#sensors.addSensorListener) ⇒ <code>undefined</code>
+    * [.removeSensorListener(sensorType, samplingPeriod, listener, [callback])](#sensors.removeSensorListener) ⇒ <code>undefined</code>
 
 <a name="sensors.addSensorListener"></a>
 
-### sensors.addSensorListener(sensorType, samplingRate, listener, [callback]) ⇒ <code>undefined</code>
+### sensors.addSensorListener(sensorType, samplingPeriod, listener, [callback]) ⇒ <code>undefined</code>
 Add a sensor listener.
 
 **Kind**: static method of [<code>sensors</code>](#sensors)  
@@ -27,7 +26,7 @@ Add a sensor listener.
 | Param | Type | Description |
 | --- | --- | --- |
 | sensorType | <code>string</code> | The sensor type's constant name (as defined by [Android's Sensor](https://developer.android.com/guide/topics/sensors/sensors_overview.html), but without the prefix `"TYPE_"`). |
-| samplingRate | <code>string</code> | The sampling period's constant name (as accepted by [SensorManager#registerListener](https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)), but without the prefix `"SENSOR_DELAY_"`). |
+| samplingPeriod | <code>string</code> | The sampling period's constant name (as accepted by [SensorManager#registerListener](https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)), but without the prefix `"SENSOR_DELAY_"`). |
 | listener | [<code>sensorEventListener</code>](#sensorEventListener) | The listener to register. |
 | [callback] | [<code>errorFirstCallback</code>](#errorFirstCallback) | A node-style callback to be called upon success or failure of the operation. |
 
@@ -37,13 +36,13 @@ function listener(event) {
   console.log("device's rotation is " + event.values.join(','));
 }
 
-addSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
+sensors.addSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
   if (error) console.error("Could not listen to sensor");
 })
 ```
 <a name="sensors.removeSensorListener"></a>
 
-### sensors.removeSensorListener(sensorType, samplingRate, listener, [callback]) ⇒ <code>undefined</code>
+### sensors.removeSensorListener(sensorType, samplingPeriod, listener, [callback]) ⇒ <code>undefined</code>
 Remove a sensor listener.
 
 **Kind**: static method of [<code>sensors</code>](#sensors)  
@@ -51,13 +50,13 @@ Remove a sensor listener.
 | Param | Type | Description |
 | --- | --- | --- |
 | sensorType | <code>string</code> | The type of the sensor as registered when the listener was added (see [addSensorListener](#sensors.addSensorListener)). |
-| samplingRate | <code>string</code> | The sampling period as registered when the listener was added (see [addSensorListener](#sensors.addSensorListener)). |
+| samplingPeriod | <code>string</code> | The sampling period as registered when the listener was added (see [addSensorListener](#sensors.addSensorListener)). |
 | listener | [<code>sensorEventListener</code>](#sensorEventListener) | The listener to remove. |
 | [callback] | [<code>errorFirstCallback</code>](#errorFirstCallback) | A node-style callback to be called upon success or failure of the operation. |
 
 **Example**  
 ```js
-removeSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
+sensors.removeSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
   if (error) console.error("Could not stop listening to sensor");
 })
 ```
