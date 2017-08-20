@@ -11,8 +11,7 @@ cordova plugin add https://github.com/QuentinRoy/cordova-plugin-android-sensors.
 
 <a name="sensors"></a>
 
-## sensors : <code>object</code>
-**Kind**: global namespace  
+## API
 
 * [sensors](#sensors) : <code>object</code>
     * [.addSensorListener(sensorType, samplingRate, listener, [callback])](#sensors.addSensorListener) ⇒ <code>undefined</code>
