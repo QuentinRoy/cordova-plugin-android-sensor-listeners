@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-android-sensor-listeners",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This plugin gives Cordova applications access to Android's sensors",
   "cordova": {
     "id": "cordova-plugin-android-sensor-listeners",
