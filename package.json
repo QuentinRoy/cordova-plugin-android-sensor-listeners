@@ -1,0 +1,32 @@
+{
+  "name": "cordova-plugin-android-sensors",
+  "version": "0.1.0",
+  "description": "This plugin gives Cordova's applications access to Android's sensors",
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuentinRoy/cordova-plugin-sensors.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "sensors"
+  ],
+  "engines": {
+    "cordova": ">=3.4.0"
+  },
+  "author": "Quentin Roy <quentin@quentinroy.fr>",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/fabiorogeriosj/cordova-plugin-sensors/issues"
+  },
+  "homepage": "https://github.com/fabiorogeriosj/cordova-plugin-sensors#readme",
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-es5": "^0.5.0"
+  }
+}
