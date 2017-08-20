@@ -1,6 +1,10 @@
 var createRegistry = require('./registry');
 
 /**
+ * @namespace sensors
+ */
+
+/**
  * Event emitted from sensors.
  * @typedef {Object} SensorEvent
  * @property {string} sensor - The type of sensor that is listened to.
@@ -97,17 +101,25 @@ document.addEventListener('deviceready', function() {
 
 /**
  * Add a sensor listener.
- * 
+ * @memberof sensors
  * @param {string} sensorType - the sensor type's constant name (as defined by
- * {@link https://developer.android.com/guide/topics/sensors/sensors_overview.html}
- * but without the "TYPE_" prefix)
+ * [Android Sensor]{@link https://developer.android.com/guide/topics/sensors/sensors_overview.html},
+ * but without the prefix `"TYPE_"`)
  * @param {string} samplingRate - the sampling period's constant name (as
  * accepted by [SensorManager#registerListener]{@link https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)}
- * without the "SENSOR_DELAY_" prefix)
+ * without the prefix `"SENSOR_DELAY_"`)
  * @param {sensorEventListener} listener - the listener to register
  * @param {errorFirstCallback} [callback] - a node-style callback to notify the success or
  * failure of the operation.
  * @return {undefined}
+ * @example
+ * function listener(event) {
+ *   console.log("device's rotation is " + event.values.join(','));
+ * }
+ * 
+ * addSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
+ *   if (error) console.error("Could not listen to sensor");
+ * })
  */
 function addSensorListener(sensorType, samplingRate, listener, callback) {
   unpromisify(callback, function(resolve, reject) {
@@ -135,15 +147,19 @@ function addSensorListener(sensorType, samplingRate, listener, callback) {
 
 /**
  * Remove a sensor listener.
- * 
+ * @memberof sensors
  * @param {string} sensorType - the type of the sensor
- * (see @link{addSensorListener})
+ * (see {@link sensors.addSensorListener})
  * @param {string} samplingRate  the sampling period
- * (see @link{addSensorListener})
+ * (see {@link sensors.addSensorListener})
  * @param {sensorEventListener} listener - the listener to remove
  * @param {errorFirstCallback} [callback] - a node-style callback to notify the
  * success or failure of the operation.
  * @return {undefined}
+ * @example
+ * removeSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
+ *   if (error) console.error("Could not stop listening to sensor");
+ * })
  */
 function removeSensorListener(sensorType, samplingRate, listener, callback) {
   unpromisify(callback, function(resolve, reject) {

@@ -2,60 +2,66 @@
 
 This plugin gives access to android sensors.
 
-## Functions
+## Install
 
-<dl>
-<dt><a href="#addSensorListener">addSensorListener(sensorType, samplingRate, listener, [callback])</a> ⇒ <code>undefined</code></dt>
-<dd><p>Add a sensor listener.</p>
-</dd>
-<dt><a href="#removeSensorListener">removeSensorListener(sensorType, samplingRate, listener, [callback])</a> ⇒ <code>undefined</code></dt>
-<dd><p>Remove a sensor listener.</p>
-</dd>
-</dl>
+```sh
+cordova plugin add https://github.com/QuentinRoy/cordova-plugin-android-sensors.git
+```
 
-## Typedefs
 
-<dl>
-<dt><a href="#SensorEvent">SensorEvent</a> : <code>Object</code></dt>
-<dd><p>Event emitted from sensors.</p>
-</dd>
-<dt><a href="#errorFirstCallback">errorFirstCallback</a> : <code>function</code></dt>
-<dd><p>This callback is used to get responses from async calls. It complies with
-nodeJS callback style.</p>
-</dd>
-<dt><a href="#sensorEventListener">sensorEventListener</a> : <code>function</code></dt>
-<dd><p>This listener is used to receive events from sensors.</p>
-</dd>
-</dl>
+<a name="sensors"></a>
 
-<a name="addSensorListener"></a>
+## sensors : <code>object</code>
+**Kind**: global namespace  
 
-## addSensorListener(sensorType, samplingRate, listener, [callback]) ⇒ <code>undefined</code>
+* [sensors](#sensors) : <code>object</code>
+    * [.addSensorListener(sensorType, samplingRate, listener, [callback])](#sensors.addSensorListener) ⇒ <code>undefined</code>
+    * [.removeSensorListener(sensorType, samplingRate, listener, [callback])](#sensors.removeSensorListener) ⇒ <code>undefined</code>
+
+<a name="sensors.addSensorListener"></a>
+
+### sensors.addSensorListener(sensorType, samplingRate, listener, [callback]) ⇒ <code>undefined</code>
 Add a sensor listener.
 
-**Kind**: global function  
+**Kind**: static method of [<code>sensors</code>](#sensors)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| sensorType | <code>string</code> | the sensor type's constant name (as defined by [https://developer.android.com/guide/topics/sensors/sensors_overview.html](https://developer.android.com/guide/topics/sensors/sensors_overview.html) but without the "TYPE_" prefix) |
-| samplingRate | <code>string</code> | the sampling period's constant name (as accepted by [SensorManager#registerListener](https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)) without the "SENSOR_DELAY_" prefix) |
+| sensorType | <code>string</code> | the sensor type's constant name (as defined by [Android Sensor](https://developer.android.com/guide/topics/sensors/sensors_overview.html), but without the prefix `"TYPE_"`) |
+| samplingRate | <code>string</code> | the sampling period's constant name (as accepted by [SensorManager#registerListener](https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)) without the prefix `"SENSOR_DELAY_"`) |
 | listener | [<code>sensorEventListener</code>](#sensorEventListener) | the listener to register |
 | [callback] | [<code>errorFirstCallback</code>](#errorFirstCallback) | a node-style callback to notify the success or failure of the operation. |
 
-<a name="removeSensorListener"></a>
+**Example**  
+```js
+function listener(event) {
+  console.log("device's rotation is " + event.values.join(','));
+}
 
-## removeSensorListener(sensorType, samplingRate, listener, [callback]) ⇒ <code>undefined</code>
+addSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
+  if (error) console.error("Could not listen to sensor");
+})
+```
+<a name="sensors.removeSensorListener"></a>
+
+### sensors.removeSensorListener(sensorType, samplingRate, listener, [callback]) ⇒ <code>undefined</code>
 Remove a sensor listener.
 
-**Kind**: global function  
+**Kind**: static method of [<code>sensors</code>](#sensors)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| sensorType | <code>string</code> | the type of the sensor (see @link{addSensorListener}) |
-| samplingRate | <code>string</code> | the sampling period (see @link{addSensorListener}) |
+| sensorType | <code>string</code> | the type of the sensor (see [addSensorListener](#sensors.addSensorListener)) |
+| samplingRate | <code>string</code> | the sampling period (see [addSensorListener](#sensors.addSensorListener)) |
 | listener | [<code>sensorEventListener</code>](#sensorEventListener) | the listener to remove |
 | [callback] | [<code>errorFirstCallback</code>](#errorFirstCallback) | a node-style callback to notify the success or failure of the operation. |
 
+**Example**  
+```js
+removeSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
+  if (error) console.error("Could not stop listening to sensor");
+})
+```
 <a name="SensorEvent"></a>
 
 ## SensorEvent : <code>Object</code>
