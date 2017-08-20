@@ -53,7 +53,7 @@ var listenerRegistry = createRegistry();
  * Called when a subscribed sensor sent an event.
  * 
  * @ignore
- * @param {SensorEvent} event - the event
+ * @param {SensorEvent} event - The event.
  * @return {undefined} 
  */
 function onSensorEvent(event) {
@@ -102,15 +102,15 @@ document.addEventListener('deviceready', function() {
 /**
  * Add a sensor listener.
  * @memberof sensors
- * @param {string} sensorType - the sensor type's constant name (as defined by
- * [Android Sensor]{@link https://developer.android.com/guide/topics/sensors/sensors_overview.html},
- * but without the prefix `"TYPE_"`)
- * @param {string} samplingRate - the sampling period's constant name (as
- * accepted by [SensorManager#registerListener]{@link https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)}
- * without the prefix `"SENSOR_DELAY_"`)
- * @param {sensorEventListener} listener - the listener to register
- * @param {errorFirstCallback} [callback] - a node-style callback to notify the success or
- * failure of the operation.
+ * @param {string} sensorType - The sensor type's constant name (as defined by
+ * [Android's Sensor]{@link https://developer.android.com/guide/topics/sensors/sensors_overview.html},
+ * but without the prefix `"TYPE_"`).
+ * @param {string} samplingRate - The sampling period's constant name (as
+ * accepted by [SensorManager#registerListener]{@link https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)},
+ * but without the prefix `"SENSOR_DELAY_"`).
+ * @param {sensorEventListener} listener - The listener to register.
+ * @param {errorFirstCallback} [callback] - A node-style callback to be called
+ * upon success or failure of the operation.
  * @return {undefined}
  * @example
  * function listener(event) {
@@ -148,13 +148,13 @@ function addSensorListener(sensorType, samplingRate, listener, callback) {
 /**
  * Remove a sensor listener.
  * @memberof sensors
- * @param {string} sensorType - the type of the sensor
- * (see {@link sensors.addSensorListener})
- * @param {string} samplingRate  the sampling period
- * (see {@link sensors.addSensorListener})
- * @param {sensorEventListener} listener - the listener to remove
- * @param {errorFirstCallback} [callback] - a node-style callback to notify the
- * success or failure of the operation.
+ * @param {string} sensorType - The type of the sensor as registered when
+ * the listener was added (see {@link sensors.addSensorListener}).
+ * @param {string} samplingRate - The sampling period as registered when
+ * the listener was added (see {@link sensors.addSensorListener}).
+ * @param {sensorEventListener} listener - The listener to remove.
+ * @param {errorFirstCallback} [callback] - A node-style callback to be called
+ * upon success or failure of the operation.
  * @return {undefined}
  * @example
  * removeSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {

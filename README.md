@@ -8,10 +8,10 @@ This plugin gives access to android sensors.
 cordova plugin add https://github.com/QuentinRoy/cordova-plugin-android-sensors.git
 ```
 
-
 <a name="sensors"></a>
 
-## API
+## API: sensors
+**Kind**: global namespace  
 
 * [sensors](#sensors) : <code>object</code>
     * [.addSensorListener(sensorType, samplingRate, listener, [callback])](#sensors.addSensorListener) ⇒ <code>undefined</code>
@@ -26,10 +26,10 @@ Add a sensor listener.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| sensorType | <code>string</code> | the sensor type's constant name (as defined by [Android Sensor](https://developer.android.com/guide/topics/sensors/sensors_overview.html), but without the prefix `"TYPE_"`) |
-| samplingRate | <code>string</code> | the sampling period's constant name (as accepted by [SensorManager#registerListener](https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)) without the prefix `"SENSOR_DELAY_"`) |
-| listener | [<code>sensorEventListener</code>](#sensorEventListener) | the listener to register |
-| [callback] | [<code>errorFirstCallback</code>](#errorFirstCallback) | a node-style callback to notify the success or failure of the operation. |
+| sensorType | <code>string</code> | The sensor type's constant name (as defined by [Android's Sensor](https://developer.android.com/guide/topics/sensors/sensors_overview.html), but without the prefix `"TYPE_"`). |
+| samplingRate | <code>string</code> | The sampling period's constant name (as accepted by [SensorManager#registerListener](https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)), but without the prefix `"SENSOR_DELAY_"`). |
+| listener | [<code>sensorEventListener</code>](#sensorEventListener) | The listener to register. |
+| [callback] | [<code>errorFirstCallback</code>](#errorFirstCallback) | A node-style callback to be called upon success or failure of the operation. |
 
 **Example**  
 ```js
@@ -50,10 +50,10 @@ Remove a sensor listener.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| sensorType | <code>string</code> | the type of the sensor (see [addSensorListener](#sensors.addSensorListener)) |
-| samplingRate | <code>string</code> | the sampling period (see [addSensorListener](#sensors.addSensorListener)) |
-| listener | [<code>sensorEventListener</code>](#sensorEventListener) | the listener to remove |
-| [callback] | [<code>errorFirstCallback</code>](#errorFirstCallback) | a node-style callback to notify the success or failure of the operation. |
+| sensorType | <code>string</code> | The type of the sensor as registered when the listener was added (see [addSensorListener](#sensors.addSensorListener)). |
+| samplingRate | <code>string</code> | The sampling period as registered when the listener was added (see [addSensorListener](#sensors.addSensorListener)). |
+| listener | [<code>sensorEventListener</code>](#sensorEventListener) | The listener to remove. |
+| [callback] | [<code>errorFirstCallback</code>](#errorFirstCallback) | A node-style callback to be called upon success or failure of the operation. |
 
 **Example**  
 ```js
