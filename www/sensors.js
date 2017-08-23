@@ -51,10 +51,10 @@ var listenerRegistry = createRegistry();
 
 /**
  * Called when a subscribed sensor sent an event.
- * 
+ *
  * @ignore
  * @param {SensorEvent} event - The event.
- * @return {undefined} 
+ * @return {undefined}
  */
 function onSensorEvent(event) {
   if (!event.sensor) {
@@ -116,10 +116,10 @@ document.addEventListener('deviceready', function() {
  * function listener(event) {
  *   console.log("device's rotation is " + event.values.join(','));
  * }
- * 
+ *
  * sensors.addSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
  *   if (error) console.error("Could not listen to sensor");
- * })
+ * });
  */
 function addSensorListener(sensorType, samplingPeriod, listener, callback) {
   unpromisify(callback, function(resolve, reject) {
@@ -159,7 +159,7 @@ function addSensorListener(sensorType, samplingPeriod, listener, callback) {
  * @example
  * sensors.removeSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
  *   if (error) console.error("Could not stop listening to sensor");
- * })
+ * });
  */
 function removeSensorListener(sensorType, samplingPeriod, listener, callback) {
   unpromisify(callback, function(resolve, reject) {

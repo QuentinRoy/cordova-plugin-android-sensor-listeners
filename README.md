@@ -38,7 +38,7 @@ function listener(event) {
 
 sensors.addSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
   if (error) console.error("Could not listen to sensor");
-})
+});
 ```
 <a name="sensors.removeSensorListener"></a>
 
@@ -58,7 +58,7 @@ Remove a sensor listener.
 ```js
 sensors.removeSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
   if (error) console.error("Could not stop listening to sensor");
-})
+});
 ```
 <a name="SensorEvent"></a>
 
@@ -98,4 +98,3 @@ This listener is used to receive events from sensors.
 | Param | Type | Description |
 | --- | --- | --- |
 | evt | [<code>SensorEvent</code>](#SensorEvent) | the event emitted by one of the sensor |
-
