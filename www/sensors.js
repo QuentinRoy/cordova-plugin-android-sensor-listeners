@@ -175,7 +175,7 @@ function removeSensorListener(sensorType, samplingPeriod, listener, callback) {
         reject,
         'Sensors',
         'unsubscribe',
-        [sensorType]
+        [sensorType, samplingPeriod]
       );
     } else {
       resolve();
