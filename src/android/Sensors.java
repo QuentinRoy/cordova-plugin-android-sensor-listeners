@@ -199,7 +199,7 @@ public class Sensors extends CordovaPlugin {
             callbackContext.success();
         } else {
             callbackContext.error(
-                    "Not listener found for sensor " +
+                    "No listener found for sensor " +
                             args.getString(0) +
                             " at sampling period " +
                             args.getString(1)
