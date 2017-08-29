@@ -88,7 +88,7 @@ module.exports = function createRegistry() {
    * @param {*} context the context of the caller
    * @return {func} a function that calls every corresponding listeners 
    * (with the arguments it is called with and using the provided context).
-   * The function return false is not listeners has been called, true otherwise.
+   * The function returns false if no listeners has been called, true otherwise.
    */
   function getListenersCaller(sensorType, samplingRate, context) {
     var hash = getHash(sensorType, samplingRate);
