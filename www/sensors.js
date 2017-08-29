@@ -166,11 +166,11 @@ function removeSensorListener(sensorType, samplingPeriod, listener, callback) {
       listenerRegistry.containsListener(sensorType, samplingPeriod, listener)
     ) {
       cordova.exec(
-        function() {
+        function(result) {
           // Do not remove the listener before receiving the confirmation as we
           // may still receive events in the meantime.
           listenerRegistry.removeListener(sensorType, samplingPeriod, listener);
-          resolve();
+          resolve(result);
         },
         reject,
         'Sensors',
