@@ -177,7 +177,7 @@ public class Sensors extends CordovaPlugin {
                 );
             }
         };
-        listeners.put(sensorTypeName, listener);
+        listeners.put(hash, listener);
         sensorManager.registerListener(listener, sensorList.get(0), samplingPeriodUs);
         callbackContext.success();
     }

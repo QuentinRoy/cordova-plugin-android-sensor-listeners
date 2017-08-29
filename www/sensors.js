@@ -28,7 +28,6 @@ var createRegistry = require('./registry');
  * @param {SensorEvent} evt - the event emitted by one of the sensor
  */
 
-
 // Small utility that enables to answer to a node-style callback in a Promise-
 // like fashion. Make sure the error and result arguments are properly
 // distributed.
@@ -163,10 +162,21 @@ function addSensorListener(sensorType, samplingPeriod, listener, callback) {
  */
 function removeSensorListener(sensorType, samplingPeriod, listener, callback) {
   unpromisify(callback, function(resolve, reject) {
-    if (listenerRegistry.removeListener(sensorType, samplingPeriod, listener)) {
-      // `listenerRegistry.removeListener` returns true if this was the last
-      // listener of its type. In this case, we unsubscribe.
-      cordova.exec(resolve, reject, 'Sensors', 'unsubscribe', [sensorType]);
+    if (
+      listenerRegistry.containsListener(sensorType, samplingPeriod, listener)
+    ) {
+      cordova.exec(
+        function(result) {
+          // Do not remove the listener before receiving the confirmation as we
+          // may still receive events in the meantime.
+          listenerRegistry.removeListener(sensorType, samplingPeriod, listener);
+          resolve(result);
+        },
+        reject,
+        'Sensors',
+        'unsubscribe',
+        [sensorType, samplingPeriod]
+      );
     } else {
       resolve();
     }

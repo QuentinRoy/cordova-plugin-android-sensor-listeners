@@ -64,6 +64,23 @@ module.exports = function createRegistry() {
   }
 
   /**
+   * Check if a listener has been registered.
+   * 
+   * @param {string} sensorType the sensor type name the listener is listening
+   * to
+   * @param {string} samplingRate the sampling rate this listener is listening
+   * at
+   * @param {function} listener the listener
+   * @return {boolean} true if the registry contains the listener, false
+   * otherwise.
+   */
+  function containsListener(sensorType, samplingRate, listener) {
+    var hash = getHash(sensorType, samplingRate);
+    var sensorListeners = listeners[hash];
+    return !!sensorListeners && sensorListeners.indexOf(listener) >= 0;
+  }
+
+  /**
    * @param {string} sensorType the sensor type name the listener is listening
    * to
    * @param {string} samplingRate the sampling rate this listener is listening
@@ -102,6 +119,7 @@ module.exports = function createRegistry() {
   return {
     addListener: addListener,
     removeListener: removeListener,
+    containsListener: containsListener,
     getListenersCaller: getListenersCaller,
     isEmpty: isEmpty
   };
