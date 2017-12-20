@@ -113,7 +113,7 @@ document.addEventListener('deviceready', function() {
  * @return {undefined}
  * @example
  * function listener(event) {
- *   console.log("device's rotation is " + event.values.join(','));
+ *   console.log("device's rotation is " + event.values.join(","));
  * }
  *
  * sensors.addSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
