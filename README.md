@@ -5,7 +5,7 @@ This plugin gives easy access to every available [Android's sensors](https://dev
 ## Install
 
 ```sh
-cordova plugin add https://github.com/QuentinRoy/cordova-plugin-android-sensors.git
+cordova plugin add https://github.com/QuentinRoy/cordova-plugin-android-sensor-listeners.git
 ```
 
 <a name="sensors"></a>
