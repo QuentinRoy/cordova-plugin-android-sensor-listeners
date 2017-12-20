@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* listeners addition being queued when they should be run and vice versa ([61b2480](https://github.com/QuentinRoy/cordova-plugin-android-sensor-listeners/commit/61b2480))
+* fix listeners addition being queued when they should be run and vice versa ([61b2480](https://github.com/QuentinRoy/cordova-plugin-android-sensor-listeners/commit/61b2480))
 
 
 ### Features
