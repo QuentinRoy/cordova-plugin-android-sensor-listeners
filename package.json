@@ -24,7 +24,7 @@
     "cordova": ">=3.4.0"
   },
   "author": "Quentin Roy <quentin@quentinroy.fr>",
-  "license": "",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/QuentinRoy/cordova-plugin-android-sensor-listeners/issues"
   },
