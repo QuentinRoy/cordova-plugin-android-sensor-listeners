@@ -53,17 +53,18 @@ var state = 'init';
 // Store functions to be called only after the registration is successful.
 var registrationQueue = [];
 
-// Function decorator that makes sure it is only called after the registration.
+// Function decorator that makes sure a function is only called after the
+// registration.
 function afterRegistration(f) {
   return function() {
     if (state === 'init') {
-      f.apply(this, arguments);
-    } else {
       var args = arguments;
       var that = this;
       registrationQueue.push(function() {
         f.apply(that, args);
       });
+    } else {
+      f.apply(this, arguments);
     }
   };
 }
