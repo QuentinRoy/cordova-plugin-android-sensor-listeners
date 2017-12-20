@@ -12,7 +12,7 @@ module.exports = function createRegistry() {
 
   /**
    * Add a listener in the registry.
-   * 
+   *
    * @param {string} sensorType the sensor type
    * @param {string} samplingRate the sampling rate
    * @param {function} listener the listener to add
@@ -34,7 +34,7 @@ module.exports = function createRegistry() {
 
   /**
    * Remove a listener from the listeners registry.
-   * 
+   *
    * @param {string} sensorType the sensor type name the listener is listening
    * to
    * @param {string} samplingRate the sampling rate this listener is listening
@@ -65,7 +65,7 @@ module.exports = function createRegistry() {
 
   /**
    * Check if a listener has been registered.
-   * 
+   *
    * @param {string} sensorType the sensor type name the listener is listening
    * to
    * @param {string} samplingRate the sampling rate this listener is listening
@@ -86,7 +86,7 @@ module.exports = function createRegistry() {
    * @param {string} samplingRate the sampling rate this listener is listening
    * at
    * @param {*} context the context of the caller
-   * @return {func} a function that calls every corresponding listeners 
+   * @return {func} a function that calls every corresponding listeners
    * (with the arguments it is called with and using the provided context).
    * The function returns false if no listeners has been called, true otherwise.
    */
