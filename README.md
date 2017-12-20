@@ -33,7 +33,7 @@ Add a sensor listener.
 **Example**  
 ```js
 function listener(event) {
-  console.log("device's rotation is " + event.values.join(','));
+  console.log("device's rotation is " + event.values.join(","));
 }
 
 sensors.addSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
