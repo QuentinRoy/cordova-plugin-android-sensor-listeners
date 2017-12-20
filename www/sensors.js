@@ -46,8 +46,10 @@ function unpromisify(nodeStyleCallback, f) {
   }
 }
 
+// Store the event listeners.
 var listenerRegistry = createRegistry();
 
+// Status of the connection with Android.
 var state = 'init';
 
 // Store functions to be called only after the registration is successful.
