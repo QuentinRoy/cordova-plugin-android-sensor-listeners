@@ -48,6 +48,26 @@ function unpromisify(nodeStyleCallback, f) {
 
 var listenerRegistry = createRegistry();
 
+var state = 'init';
+
+// Store functions to be called only after the registration is successful.
+var registrationQueue = [];
+
+// Function decorator that makes sure it is only called after the registration.
+function afterRegistration(f) {
+  return function() {
+    if (state === 'init') {
+      f.apply(this, arguments);
+    } else {
+      var args = arguments;
+      var that = this;
+      registrationQueue.push(function() {
+        f.apply(that, args);
+      });
+    }
+  };
+}
+
 /**
  * Called when a subscribed sensor sent an event.
  *
@@ -76,7 +96,16 @@ document.addEventListener('deviceready', function() {
     if (resp === 'registered') {
       // Once the confirmation has been received, this directly handle events.
       registrationCallback = onSensorEvent;
+      // Update the state and call any pending pending call in the registration
+      // queue.
+      state = 'registered';
+      var n = registrationQueue.length;
+      for (var i = 0; i < n; i += 1) {
+        registrationQueue[i]();
+      }
+      registrationQueue = null;
     } else {
+      state = 'error';
       throw new Error(
         'Expecting confirmation for the callback registration but received: ' +
           resp
@@ -97,16 +126,17 @@ document.addEventListener('deviceready', function() {
   );
 });
 
-
 /**
  * Add a sensor listener.
+ * @function
  * @memberof sensors
+ * @name addSensorListener
  * @param {string} sensorType - The sensor type's constant name (as defined by
  * [Android's Sensor]{@link https://developer.android.com/guide/topics/sensors/sensors_overview.html},
- * but without the prefix `"TYPE_"`).
+ * but without the prefix `'TYPE_'`).
  * @param {string} samplingPeriod - The sampling period's constant name (as
  * accepted by [SensorManager#registerListener]{@link https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)},
- * but without the prefix `"SENSOR_DELAY_"`).
+ * but without the prefix `'SENSOR_DELAY_'`).
  * @param {sensorEventListener} listener - The listener to register.
  * @param {errorFirstCallback} [callback] - A node-style callback to be called
  * upon success or failure of the operation.
@@ -116,11 +146,16 @@ document.addEventListener('deviceready', function() {
  *   console.log("device's rotation is " + event.values.join(','));
  * }
  *
- * sensors.addSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
- *   if (error) console.error("Could not listen to sensor");
+ * sensors.addSensorListener('ROTATION_VECTOR', 'GAME', listener, function(error) {
+ *   if (error) console.error('Could not listen to sensor');
  * });
  */
-function addSensorListener(sensorType, samplingPeriod, listener, callback) {
+module.exports.addSensorListener = afterRegistration(function(
+  sensorType,
+  samplingPeriod,
+  listener,
+  callback
+) {
   unpromisify(callback, function(resolve, reject) {
     if (listenerRegistry.addListener(sensorType, samplingPeriod, listener)) {
       // `listenerRegistry.addListener` returns true if there was no listener
@@ -142,11 +177,13 @@ function addSensorListener(sensorType, samplingPeriod, listener, callback) {
       resolve();
     }
   });
-}
+});
 
 /**
  * Remove a sensor listener.
+ * @function
  * @memberof sensors
+ * @name removeSensorListener
  * @param {string} sensorType - The type of the sensor as registered when
  * the listener was added (see {@link sensors.addSensorListener}).
  * @param {string} samplingPeriod - The sampling period as registered when
@@ -156,11 +193,16 @@ function addSensorListener(sensorType, samplingPeriod, listener, callback) {
  * upon success or failure of the operation.
  * @return {undefined}
  * @example
- * sensors.removeSensorListener("ROTATION_VECTOR", "GAME", listener, function(error) {
- *   if (error) console.error("Could not stop listening to sensor");
+ * sensors.removeSensorListener('ROTATION_VECTOR', 'GAME', listener, function(error) {
+ *   if (error) console.error('Could not stop listening to sensor');
  * });
  */
-function removeSensorListener(sensorType, samplingPeriod, listener, callback) {
+module.exports.removeSensorListener = afterRegistration(function(
+  sensorType,
+  samplingPeriod,
+  listener,
+  callback
+) {
   unpromisify(callback, function(resolve, reject) {
     if (
       listenerRegistry.containsListener(sensorType, samplingPeriod, listener)
@@ -181,7 +223,4 @@ function removeSensorListener(sensorType, samplingPeriod, listener, callback) {
       resolve();
     }
   });
-}
-
-module.exports.addSensorListener = addSensorListener;
-module.exports.removeSensorListener = removeSensorListener;
+});
